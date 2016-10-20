@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Angularlogger : This module can be used in angular 1.* applications to replace the traditional console.log operations. This module comes with many features including directly making rest calls for configured error logs.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Angularlogger</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/akhilarjun/AngularLogger">View on GitHub</a>
+
+          <h1 id="project_title">Angularlogger</h1>
+          <h2 id="project_tagline">This module can be used in angular 1.* applications to replace the traditional console.log operations. This module comes with many features including directly making rest calls for configured error logs.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/akhilarjun/AngularLogger/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/akhilarjun/AngularLogger/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="angularlogger" class="anchor" href="#angularlogger" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AngularLogger</h1>
+
+<p>This module can be used in angular 1.* applications to replace the traditional console.log operations. This module comes with many features including directly making rest calls for configured error logs.</p>
+
+<h2>
+<a id="how-to" class="anchor" href="#how-to" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How To:</h2>
+
+<p>First you have to include the <em>angular-logger.js</em> file to your page, after including the AngularJS</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">'</span>js/angular-1.*.js<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">'</span>js/angular-logger.js<span class="pl-pds">'</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p>And then initialise it in your angular application as follows,</p>
+
+<div class="highlight highlight-source-js"><pre>
+<span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-smi">angular</span>.<span class="pl-en">module</span>(<span class="pl-s"><span class="pl-pds">"</span>app<span class="pl-pds">"</span></span>,[<span class="pl-s"><span class="pl-pds">'</span>xLogger<span class="pl-pds">'</span></span>]);
+</pre></div>
+
+<p>Now include the <em>xLogger</em> service to your controller and Voila! you get your logger ready to use</p>
+
+<div class="highlight highlight-source-js"><pre>
+<span class="pl-smi">app</span>.<span class="pl-en">controller</span>(<span class="pl-s"><span class="pl-pds">"</span>demoController<span class="pl-pds">"</span></span>,[<span class="pl-s"><span class="pl-pds">"</span>$scope<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>xLogger<span class="pl-pds">"</span></span>,<span class="pl-k">function</span>(<span class="pl-smi">$scope</span>,<span class="pl-smi">xLogger</span>){
+  <span class="pl-smi">xLogger</span>.<span class="pl-en">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Standard LOG<span class="pl-pds">'</span></span>);
+}]);
+</pre></div>
+
+<p>Or, for minimal code change, give the <em>xLogger</em> service an alias like <em>console</em> and the code should look like this </p>
+
+<div class="highlight highlight-source-js"><pre>
+<span class="pl-smi">app</span>.<span class="pl-en">controller</span>(<span class="pl-s"><span class="pl-pds">"</span>demoController<span class="pl-pds">"</span></span>,[<span class="pl-s"><span class="pl-pds">"</span>$scope<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>xLogger<span class="pl-pds">"</span></span>,<span class="pl-k">function</span>(<span class="pl-smi">$scope</span>,<span class="pl-en">console</span>){
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Standard LOG<span class="pl-pds">'</span></span>);
+}]);
+</pre></div>
+
+<h3>
+<a id="apis" class="anchor" href="#apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API's</h3>
+
+<p>Angular Logger comes with a plethora of configurations.
+To configure the logger you need to inject <em>xLoggerProvider</em> in your <strong>config</strong> function</p>
+
+<div class="highlight highlight-source-js"><pre>
+<span class="pl-smi">app</span>.<span class="pl-en">config</span>([<span class="pl-s"><span class="pl-pds">'</span>xLoggerProvider<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">xLoggerProvider</span>) {
+  <span class="pl-c">//configurations go here...</span>
+}]);
+</pre></div>
+
+<p><strong>getContext</strong> : This method accepts the application name, or the context name which can be later used to filter logs. This is a mandate method, without it the Logger would throw an error</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">xLoggerProvider</span>.<span class="pl-c1">getContext</span>(<span class="pl-s"><span class="pl-pds">'</span>AsyncLoggerDemo<span class="pl-pds">'</span></span>);</pre></div>
+
+<p><strong>printLogs</strong> : This method can be used to control turn on or off all the logs that are printed in the console. This way you can turn on the logs during development and then turn it of during the actual production code</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//This defaults to true</span>
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">printLogs</span>(<span class="pl-c1">false</span>);
+</pre></div>
+
+<p><strong>setDateFormat</strong> : This method can be used to format the date that will be printed along with the logs</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setDateFormat</span>(<span class="pl-s"><span class="pl-pds">'</span>dd-MMM hh:mm:ss a<span class="pl-pds">'</span></span>);</pre></div>
+
+<p><strong>writeToServer</strong> : This is a boolean method which tells the logger if it should write logs to server or not.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//Defaults to true</span>
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">writeToServer</span>(<span class="pl-c1">false</span>);</pre></div>
+
+<p><strong>setTypesOfLogsToWrite</strong> : This method accepts the type of logs that you need to write to server. It accepts a string with the types comma seperated</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//supported types are log,error,debug,info,warn</span>
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setTypesOfLogsToWrite</span>(<span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>);
+<span class="pl-c">//If multiple types of logs are to be written to server</span>
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setTypesOfLogsToWrite</span>(<span class="pl-s"><span class="pl-pds">'</span>error,debug<span class="pl-pds">'</span></span>);</pre></div>
+
+<p><strong>setServiceURLs</strong> : Set the URL's to be hit when particular logs are to be written on server</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setServiceURLs</span>(<span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>rest/writeErrorLogFromJS<span class="pl-pds">'</span></span>);
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setServiceURLs</span>(<span class="pl-s"><span class="pl-pds">'</span>debug<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>rest/writeDebugLogFromJS<span class="pl-pds">'</span></span>);</pre></div>
+
+<p><strong>setMethod</strong> : Change the method to send data to application</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//Supports 'GET', 'POST'</span>
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setMethod</span>(<span class="pl-s"><span class="pl-pds">'</span>get<span class="pl-pds">'</span></span>);</pre></div>
+
+<p><strong>setCustomCss</strong> : With this method you can style how your logs should look like. You have to pass style definitions and not class names</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setCustomCss</span>(<span class="pl-s"><span class="pl-pds">'</span>log<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>background:#333;color:#2ee8a1;<span class="pl-pds">'</span></span>);
+<span class="pl-smi">xLoggerProvider</span>.<span class="pl-en">setCustomCss</span>(<span class="pl-s"><span class="pl-pds">'</span>info<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>background:#ddd;color:#39c;<span class="pl-pds">'</span></span>);</pre></div>
+
+<blockquote>
+<p>Made with ♥ from Akhil Arjun</p>
+</blockquote>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Angularlogger maintained by <a href="https://github.com/akhilarjun">akhilarjun</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
